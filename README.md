@@ -1,80 +1,89 @@
-##CSVReader Application
+## CsvImporter
+A simple console application that reads vehicle data from a CSV file and inserts it into an Azure SQL database.
 
-###Overview
-The CSVReader application is a simple tool that reads vehicle data from a CSV file and uploads it to an Azure SQL Database. It is designed to be quick to run, with minimal configuration needed from the user.
+### 🧰 Prerequisites
+.NET SDK (version 6.0 or later recommended)
 
-###Prerequisites
-A correctly formatted vehicles.csv file (see structure below)
+Access to an Azure SQL Database or a local SQL Server instance
 
-###Getting Started
-1. Prepare Your CSV File
-Save your vehicles.csv file somewhere with an easy-to-type path, such as:
+A CSV file named vehicles.csv in a convenient location (e.g., C:\vehicles.csv)
 
-makefile
-Copy
-Edit
-C:\vehicles.csv
-Ensure the file is formatted with the following columns:
+## 📄 CSV Format
+The CSV file should contain the following columns:
 
 css
 Copy
 Edit
 MAKE,MODEL,REG,COLOR
-Example:
-
+Example
 csv
 Copy
 Edit
 Toyota,Corolla,AB12CDE,Red
 Ford,Focus,CD34EFG,Blue
-2. Run the Application
-Navigate to the directory where the application is located and run:
+Volkswagen,Golf,EF56HIJ,Black
+🚀 How to Use
+Clone the repository:
+
+bash
+Copy
+Edit
+git clone https://github.com/glyn1981/CsvImporter.git
+cd CsvImporter
+Build the application:
+
+bash
+Copy
+Edit
+dotnet build
+Run the application:
 
 bash
 Copy
 Edit
 dotnet run
-You’ll be prompted to enter the full path to the CSV file:
+When prompted, enter the full path to your vehicles.csv file. For example:
 
 vbnet
 Copy
 Edit
 Please enter the full path to your CSV file:
 C:\vehicles.csv
-Once entered, the application will read the file and attempt to upload the records to the database.
+The application will then read the data from the file and attempt to save it to the database.
 
-Database Setup
-Using Azure SQL
+🛠️ Database Configuration
+By default, the app uses the connection string in appsettings.json:
 
-The application is set to connect to a DB I created in Azure.
-I have enabled public access, so I dont anticipate there being a problem, however
+json
+Copy
+Edit
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Your Azure or local SQL connection string"
+  }
+}
+If you cannot connect to the provided Azure SQL database:
 
-If the connection fails:
+You may need to contact the owner (e.g., send your IP address to glyn_1981@hotmail.com) to have it whitelisted.
 
-You can share your IP address with  (glyn_1981@hotmail.com) or Liam to whitelist it
+Alternatively, configure your own local SQL Server instance:
 
-OR use a local SQL Server instance as described below
+🧪 Create a Local Database
+Create a database named vehicledb.
 
-Using a Local Database
-If you prefer to run against a local database:
+Execute the following SQL to create the required table:
 
-Create a new SQL Server database named vehicledb
-
-Update the ConnectionStrings:DefaultConnection in appsettings.json to point to your local SQL Server
-
-Run the following SQL to create the required table:
-
-
+sql
+Copy
+Edit
 CREATE TABLE [dbo].[VEHICLES](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
-	[MAKE] [nvarchar](50) NULL,
-	[MODEL] [nvarchar](50) NULL,
-	[REG] [nvarchar](10) NULL,
-	[COLOR] [nvarchar](30) NULL,
-PRIMARY KEY CLUSTERED 
-(
+	  NULL,
+	  NULL,
+	  NULL,
+	  NULL,
+PRIMARY KEY CLUSTERED (
 	[ID] ASC
-)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-
+)
+)
+Update the appsettings.json file with the connection string to your local database.
