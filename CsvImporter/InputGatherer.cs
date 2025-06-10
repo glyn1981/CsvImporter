@@ -24,8 +24,12 @@ namespace CsvImporter
                 if (!validFile)
                 {
                     // If the file is not valid, prompt the user again
-                    _uiHandler.WriteOutput("The file path is invalid. Please try again.");
-                    return GetUserFileNameAndValidateFile();
+                    _uiHandler.WriteOutput("The file path is invalid. Re-Run the application to try again.");
+
+                    //return empty string to indicate failure
+                    //needed for integration testing otherwise we get stuck in a loop.
+                    return string.Empty;
+             
                 }
                 return path;
             }

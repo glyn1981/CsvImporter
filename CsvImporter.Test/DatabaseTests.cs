@@ -37,6 +37,7 @@ namespace CsvImporter.Test
             dbHandler.SaveVehicles(vehicles, context);
             Assert.Equal(context.Vehicles.Count(), vehicles.Count());
             Assert.Equal(vehicles, vehicleList, new VehicleComparer());
+
         }
 
         /// <summary>

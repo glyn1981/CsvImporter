@@ -2,11 +2,15 @@
 using CsvImporter.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-class Program()
-{
-    static void Main()
-    {
+using NUnit.Framework;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("CsvImporter.Test")]
+internal class Program
+{
+
+    public static void Main()
+    {
         // setup configuration file
         IConfiguration configuration = new ConfigurationBuilder()
            .SetBasePath(Directory.GetCurrentDirectory())
